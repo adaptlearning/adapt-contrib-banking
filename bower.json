@@ -1,0 +1,17 @@
+{
+  "name": "adapt-contrib-banking",
+  "version": "1.0.0",
+  "framework": ">=5.4",
+  "homepage": "https://github.com/adaptlearning/adapt-contrib-banking",
+  "issues": "https://github.com/adaptlearning/adapt_framework/issues/new",
+  "extension" : "banking",
+  "displayName" : "Banking",
+  "description": "An extension which...",
+  "main": "/js/adapt-contrib-banking.js",
+  "keywords": [
+    "adapt-plugin",
+    "adapt-extension"
+  ],
+  "license": "GPL-3.0",
+  "targetAttribute": "_banking"
+}
