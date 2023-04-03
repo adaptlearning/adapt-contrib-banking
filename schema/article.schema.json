@@ -1,0 +1,33 @@
+{
+  "$anchor": "banking-article",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "$patch": {
+    "source": {
+      "$ref": "article"
+    },
+    "with": {
+      "properties": {
+        "_banking": {
+          "type": "object",
+          "title": "Banking",
+          "default": {},
+          "properties": {
+            "_isEnabled": {
+              "type": "boolean",
+              "title": "Enable banking",
+              "description": "Determines whether this model should use banked content",
+              "default": false
+            },
+            "_split": {
+              "type": "string",
+              "title": "Child counts",
+              "description": "A comma-separated list of numbers corresponding to the number of child models to be drawn from each bank. The position of the numeral in the list corresponds to the `_banking._id` assigned to each parent model",
+              "default": ""
+            }
+          }
+        }
+      }
+    }
+  }
+}

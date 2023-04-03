@@ -1,0 +1,10 @@
+// articles.json
+"_banking": {
+  "_isEnabled": true,
+  "_split": "2,2"
+}
+
+// blocks.json
+"_banking": {
+  "_id": 1
+}

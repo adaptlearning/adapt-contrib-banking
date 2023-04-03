@@ -1,0 +1,33 @@
+{
+  "$anchor": "banking-block",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "$patch": {
+    "source": {
+      "$ref": "block"
+    },
+    "with": {
+      "properties": {
+        "_banking": {
+          "type": "object",
+          "title": "Banking",
+          "default": {},
+          "properties": {
+            "_id": {
+              "type": "number",
+              "title": "Bank ID",
+              "description": "The bank ID with which the model is associated",
+              "default": 1,
+              "_backboneForms": {
+                "editorAttrs": {
+                  "step": 1,
+                  "min": 1
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

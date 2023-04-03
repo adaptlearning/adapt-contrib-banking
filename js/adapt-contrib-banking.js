@@ -10,20 +10,9 @@ class Banking extends Backbone.Controller {
     });
   }
 
-  hasBanking(model) {
-    return this.getConfigByModel(model)?._isEnabled;
-  }
-
-  getConfigByModel(model) {
-    return model.get('_banking');
-  }
-
-  get bankedModels() {
-    return Data.filter(model => this.hasBanking(model));
-  }
-
   onAppDataReady() {
-    this.bankedModels.forEach(model => new BankedSet({ model }));
+    const models = Data.filter(model => model.get('_banking')?._isEnabled);
+    models.forEach(model => new BankedSet({ model }));
   }
 
 }
