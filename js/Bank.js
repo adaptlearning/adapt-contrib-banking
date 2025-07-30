@@ -1,10 +1,13 @@
 import Logging from 'core/js/logging';
+import {
+  isModelAvailableInHierarchy
+} from 'extensions/adapt-contrib-scoring/js/adapt-contrib-scoring';
 
 export default class Bank {
 
   constructor(id, models, count) {
     this._id = id;
-    this._rawModels = models;
+    this._originalModels = models;
     this._count = count;
     this._usedModels = [];
   }
@@ -14,10 +17,9 @@ export default class Bank {
    * Recycle the models once all used.
    */
   selectModels() {
-    const availableModels = this._rawModels.filter(model => {
+    const availableModels = this._originalModels.filter(model => {
       const isInBank = model.get('_banking')?._id === this._id;
-      const isAvailableInHierarchy = model.getAncestorModels(true).every(model => model.get('_isAvailable'));
-      return isInBank && isAvailableInHierarchy;
+      return isInBank && isModelAvailableInHierarchy(model, { allowDetached: true });
     });
     const models = availableModels.filter(model => !(this._usedModels.includes(model)));
     const shortfall = this._count - models.length;
@@ -26,7 +28,7 @@ export default class Bank {
       models.push(...this._pluck(availableModels, shortfall));
       this._usedModels = [];
     }
-    const randomisedModels = this._shuffle(models);
+    const randomisedModels = _.shuffle(models);
     this._models = this._pluck(randomisedModels, this._count);
     this._usedModels.push(...this.models);
   }
@@ -35,18 +37,8 @@ export default class Bank {
    * Returns the banked models
    * @returns {[AdaptModel]}
    */
-   get models() {
+  get models() {
     return this._models;
-  }
-
-  /**
-   * Returns a shuffled list
-   * @private
-   * @param {Array} list
-   * @returns {[AdaptModel]}
-   */
-  _shuffle(list) {
-    return _.shuffle(list);
   }
 
   /**
