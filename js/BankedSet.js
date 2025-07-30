@@ -59,14 +59,12 @@ export default class BankedSet extends LifecycleSet {
 
   /** @override */
   async onInit() {
-    if (this.isIntersectedSet) return;
     if (!this.isEnabled) return;
     this._banks = {};
   }
 
   /** @override */
   async onRestore() {
-    if (this.isIntersectedSet) return;
     if (!this.isEnabled) return false;
     if (!this.state.restore()) return false;
     await super.onRestore();
@@ -75,7 +73,6 @@ export default class BankedSet extends LifecycleSet {
 
   /** @override */
   async onStart() {
-    if (this.isIntersectedSet) return;
     if (!this.split) return;
     const models = [];
     this.split.forEach((count, index) => {
